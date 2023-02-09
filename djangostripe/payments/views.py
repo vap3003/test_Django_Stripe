@@ -1,11 +1,13 @@
 from django.conf import settings
+from django.shortcuts import render
 from django.http.response import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import TemplateView
 import stripe
 
-class HomePage(TemplateView):
-    template_name = 'home.html'
+
+def index(request):
+    return render(request, 'home.html')
 
 
 @csrf_exempt
