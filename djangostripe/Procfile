@@ -1,1 +1,1 @@
-web: gunicorn djangostripe.wsgi:application
+web: gunicorn djangostripe.wsgi: --log-file
