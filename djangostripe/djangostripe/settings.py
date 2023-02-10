@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['tap-django-stripe.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['tap-django-stripe.herokuapp.com']
 
 
 # Application definition
