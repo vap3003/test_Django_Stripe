@@ -1,2 +1,2 @@
-gunicorn djangostripe.wsgi.application
+web: gunicorn djangostripe.wsgi
 release: python djangostripe/manage.py migrate
