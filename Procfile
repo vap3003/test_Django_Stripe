@@ -1,1 +1,1 @@
-web: gunicorn djangostripe.wsgi:application --chdir /djangostripe
+web: gunicorn djangostripe.wsgi --chdir /app/djangostripe
