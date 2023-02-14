@@ -8,20 +8,18 @@
     <h1>{{ item.name }}</h1>
     <p>{{ item.description }}</p>
     <p>{{ item.price }}</p>
-    <div class="card-footer d-flex">
-      <button class="btn btn-success ml-auto" id="checkout-button">Buy {{ item.name }}</button>
-    </div>
+    <button class="btn btn-success ml-auto" id="checkout-button">Buy {{ item.name }}</button>
     <script src="https://js.stripe.com/v3/"></script>
     <script type="text/javascript">
-    // Create an instance of the Stripe object with your publishable API key
-    var stripe = Stripe('{{ stripe_publishable_key }}');
-    var checkoutButton = document.getElementById('checkout-button');
+      // Create an instance of the Stripe object with your publishable API key
+      var stripe = Stripe('{{ stripe_publishable_key }}');
+      var checkoutButton = document.getElementById('checkout-button');
 
-    checkoutButton.addEventListener('click', function () {
+      checkoutButton.addEventListener('click', function () {
 
         // Create a new Checkout Session using the server-side endpoint you
         // created in step 3.
-        fetch("{% url 'api_checkout_session' id=item.id %}", {
+        fetch('{% https://tap-django-stripe.herokuapp.com/api/checkout-session/{{ item.id }} %}', {
             method: 'POST',
         })
             .then(function (response) {
@@ -41,7 +39,7 @@
             .catch(function (error) {
                 console.error('Error:', error);
             });
-    });
+      });
     </script>
   </body>
 </html>
