@@ -22,11 +22,11 @@
         fetch('https://tap-django-stripe.herokuapp.com/api/checkout-session/{{ item.id }}', {
             method: 'POST',
         })
-            .then(function (response) {
+            .then((response) => {
                 return response.json();
             })
-            .then(function (session) {
-                return stripe.redirectToCheckout(sessionId: response['sessionId']);
+            .then((session) => {
+                return stripe.redirectToCheckout({ sessionId: session.id });
             })
             .then(function (result) {
                 // If `redirectToCheckout` fails due to a browser or network
