@@ -2,6 +2,8 @@ from django.urls import path
 
 from . import views
 
+app_name = 'payments'
+
 urlpatterns = [
     path('', views.all_items, name='home'),
     path('item/<int:id>', views.item, name='item'),
