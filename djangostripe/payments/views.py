@@ -21,26 +21,26 @@ def item(request, id):
     return render(request, template, context)        
 
 
-def buy(request, id):
-    if request.method == 'GET':
-        item = get_object_or_404(Item, id=id)
-        domain = 'https://tap-django-stripe.herokuapp.com'
-        stripe.api_key = settings.STRIPE_PUBLISHABLE_KEY
-        checkout_session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
-            line_items=[
-                {
-                    'name': item.name,
-                    'quantity': 1,
-                    'currency': 'usd',
-                    'amount': item.price
-                },
-            ],
-            mode='payment',
-            success_url = domain + '/success/',
-            cancel_url = domain + '/cancel/',
-        )
-        return stripe.redirectToCheckout( 'sessionId': checkout_session.id)
+# def buy(request, id):
+#     if request.method == 'GET':
+#         item = get_object_or_404(Item, id=id)
+#         domain = 'https://tap-django-stripe.herokuapp.com'
+#         stripe.api_key = settings.STRIPE_PUBLISHABLE_KEY
+#         checkout_session = stripe.checkout.Session.create(
+#             payment_method_types=['card'],
+#             line_items=[
+#                 {
+#                     'name': item.name,
+#                     'quantity': 1,
+#                     'currency': 'usd',
+#                     'amount': item.price
+#                 },
+#             ],
+#             mode='payment',
+#             success_url = domain + '/success/',
+#             cancel_url = domain + '/cancel/',
+#         )
+#         return stripe.redirectToCheckout( 'sessionId': checkout_session.id)
         # return JsonResponse({'sessionId': checkout_session['id']})
 
 
