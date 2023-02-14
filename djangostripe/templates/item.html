@@ -12,7 +12,7 @@
     <button class="btn btn-success ml-auto" id="checkout-button">Buy {{ item.name }}</button>
     <script type="text/javascript">
       // Create an instance of the Stripe object with your publishable API key
-      var stripe = Stripe('{{ stripe_publishable_key }}');
+      var stripe = Stripe('{{ api_key }}');
       var checkoutButton = document.getElementById('checkout-button');
 
       checkoutButton.addEventListener('click', function () {
