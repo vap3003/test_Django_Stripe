@@ -9,7 +9,7 @@
     <p>{{ item.description }}</p>
     <p>{{ item.price }}</p>
     <form action="{{ document.location.hostname }}/buy/{{ item.pk }}">
-      <input type="submit" value="Buy" />
+      <input type="submit" value="Buy {{ item.name }}" />
     </form>
   </body>
 </html>

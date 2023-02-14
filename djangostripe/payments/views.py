@@ -1,3 +1,4 @@
+from http.client import HTTPResponse
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http.response import JsonResponse
@@ -38,7 +39,8 @@ def buy(request, id):
             success_url = domain + '/success/',
             cancel_url = domain + '/cancel/',
         )
-        return JsonResponse({'sessionId': checkout_session['id']})
+        return HTTPResponse(f'{checkout_session}')
+        # return JsonResponse({'sessionId': checkout_session['id']})
 
 
         #     return JsonResponse({'sessionId': checkout_session['id']})
