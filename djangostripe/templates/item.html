@@ -19,14 +19,14 @@
 
         // Create a new Checkout Session using the server-side endpoint you
         // created in step 3.
-        fetch('https://tap-django-stripe.herokuapp.com/api/checkout-session/1', {
+        fetch('https://tap-django-stripe.herokuapp.com/api/checkout-session/{{ item.id }}', {
             method: 'POST',
         })
             .then(function (response) {
                 return response.json();
             })
             .then(function (session) {
-                return stripe.redirectToCheckout({ sessionId: session.sessionId });
+                return stripe.redirectToCheckout({ sessionId: session['sessionId'] });
             })
             .then(function (result) {
                 // If `redirectToCheckout` fails due to a browser or network
