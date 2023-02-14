@@ -15,7 +15,7 @@
       buyButton.addEventListener('click', function() {
         // Create a new Checkout Session using the server-side endpoint 
         // Redirect to Stripe Session Checkout
-        fetch('http://127.0.0.1:8000/buy/1', {method: 'GET'})
+        fetch('https://tap-django-stripe.herokuapp.com/buy/1', {method: 'GET'})
         .then(response => return response.json())
         .then(session => stripe.redirectToCheckout({ sessionId: session.id }))
       });
