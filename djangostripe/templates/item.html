@@ -26,7 +26,7 @@
                 return response.json();
             })
             .then(function (session) {
-                return stripe.redirectToCheckout({ sessionId: session['sessionId'] });
+                return stripe.redirectToCheckout({ sessionId: response['sessionId'] });
             })
             .then(function (result) {
                 // If `redirectToCheckout` fails due to a browser or network
