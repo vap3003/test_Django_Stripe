@@ -20,7 +20,7 @@ def item(request, id):
 
 
 def buy(request, id):
-    if request.method == 'POST':
+    if request.method == 'GET':
         item = get_object_or_404(Item, id=id)
         domain = "https://tap-django-stripe.herokuapp.com"
         if settings.DEBUG:
