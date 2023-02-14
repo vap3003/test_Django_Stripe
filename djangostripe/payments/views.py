@@ -37,7 +37,7 @@ def buy(request, id):
             success_url = domain + '/success/',
             cancel_url = domain + '/cancel/',
         )
-        return redirect(checkout_session.url)
+        return checkout_session
 
 
         #     return JsonResponse({'sessionId': checkout_session['id']})
