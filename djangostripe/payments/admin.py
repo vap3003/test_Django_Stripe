@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import Item
 
 
@@ -10,7 +11,7 @@ class ItemAdmin(admin.ModelAdmin):
         'price'
     )
     search_fields = ('name',)
-    ordering = ['price', 'pk']
+    ordering = ['price', 'id']
     empty_value_display = '-пусто-'
 
 

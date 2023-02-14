@@ -11,10 +11,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
-from dotenv import load_dotenv
-from django.test.runner import DiscoverRunner
-import dj_database_url 
 
+import dj_database_url
+from django.test.runner import DiscoverRunner
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -84,18 +84,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'djangostripe.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 MAX_CONN_AGE = 600
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, "db.sqlite3")
-#     }
-# }
 
 DATABASES = {
     'default': {

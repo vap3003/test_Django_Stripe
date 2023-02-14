@@ -13,7 +13,9 @@
       <article>
         {% for item in page_obj %}
         <hr>
-        <h2>{{ item.name }}</h2>
+        <a href="{{ window.location.origin }}/item/{{ item.id }}">
+          <h2>{{ item.name }}</h2>
+        </a>
         <h5>{{ item.price }}</h5>
         <br>
         <h5>{{ item.description }}</h5>
@@ -22,6 +24,7 @@
           <button class="btn btn-primary">Buy</button>
         </a>
         {% endfor %}
+        {% include 'items/includes/paginator.html' %}
     </article>
   </div>
   </body>

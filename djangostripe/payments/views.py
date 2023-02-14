@@ -1,8 +1,10 @@
-from django.conf import settings
-from django.shortcuts import render, get_object_or_404, redirect
-from django.views.decorators.csrf import csrf_exempt
 import stripe
+from django.conf import settings
 from django.core.paginator import Paginator
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.csrf import csrf_exempt
+
 from .models import Item
 
 
@@ -15,7 +17,7 @@ def paginator(request, items_list):
 def all_items(request):
     item_list = Item.objects.all()
     page_obj = paginator(request, item_list)
-    template = 'home.html'
+    template = 'items/home.html'
     api_key = settings.STRIPE_PUBLISHABLE_KEY
     context = {
         'page_obj': page_obj,
@@ -26,13 +28,13 @@ def all_items(request):
 
 def item(request, id):
     item = get_object_or_404(Item, id=id)
-    template = 'item.html'
+    template = 'items/item.html'
     api_key = settings.STRIPE_PUBLISHABLE_KEY
     context = {
         'item': item,
         'api_key': api_key
     }
-    return render(request, template, context)        
+    return render(request, template, context)
 
 
 @csrf_exempt
@@ -46,7 +48,7 @@ def buy(request, id):
                 'price_data': {
                     'currency': 'usd',
                     'product_data': {
-                    'name': item.name,
+                        'name': item.name,
                     },
                     'unit_amount': int(item.price * 100),
                 },
@@ -54,7 +56,15 @@ def buy(request, id):
             }
         ],
         mode='payment',
-        success_url='https://tap-django-stripe.herokuapp.com',
-        cancel_url='https://tap-django-stripe.herokuapp.com',
+        success_url='https://tap-django-stripe.herokuapp.com/succses',
+        cancel_url='https://tap-django-stripe.herokuapp.com/cancel',
     )
     return redirect(checkout_session.url, code=303)
+
+
+def success(request):
+    return HttpResponse('Success')
+
+
+def cancel(request):
+    return HttpResponse('Cancel')
