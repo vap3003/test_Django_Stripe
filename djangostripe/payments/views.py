@@ -23,21 +23,22 @@ def buy(request, id):
     if request.method == 'GET':
         item = get_object_or_404(Item, id=id)
         domain = "https://tap-django-stripe.herokuapp.com"
-        if settings.DEBUG:
-            domain = "http://127.0.0.1:8000"
+        stripe.api_key = settings.STRIPE_SECRET_KEY
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items=[
                 {
-                    'price': item.price.stripe_price_id,
+                    'name': item.name,
                     'quantity': 1,
+                    'currency': 'usd',
+                    'amount': item.price
                 },
             ],
             mode='payment',
             success_url = domain + '/success/',
             cancel_url = domain + '/cancel/',
         )
-        return checkout_session
+        return JsonResponse({'sessionId': checkout_session['id']})
 
 
         #     return JsonResponse({'sessionId': checkout_session['id']})
