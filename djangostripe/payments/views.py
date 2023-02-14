@@ -67,9 +67,7 @@ def create_checkout_session(request, id):
             }
         ],
         mode='payment',
-        success_url=request.build_absolute_uri(
-            reverse('success')
-        ) + "?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url=request.build_absolute_uri(reverse('failed')),
+        success_url='https://tap-django-stripe.herokuapp.com',
+        cancel_url='https://tap-django-stripe.herokuapp.com',
     )
     return JsonResponse({'sessionId': checkout_session.id})
