@@ -8,7 +8,9 @@
     <h1>{{ item.name }}</h1>
     <p>{{ item.description }}</p>
     <p>{{ item.price }}</p>
-
+    <div class="card-footer d-flex">
+      <button class="btn btn-success ml-auto" id="checkout-button">Buy {{ item.name }}</button>
+    </div>
     <script src="https://js.stripe.com/v3/"></script>
     <script type="text/javascript">
     // Create an instance of the Stripe object with your publishable API key
@@ -19,7 +21,7 @@
 
         // Create a new Checkout Session using the server-side endpoint you
         // created in step 3.
-        fetch("{% url 'api_checkout_session' id=object.id %}", {
+        fetch("{% url 'api_checkout_session' id=item.id %}", {
             method: 'POST',
         })
             .then(function (response) {
