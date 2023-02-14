@@ -70,4 +70,5 @@ def create_checkout_session(request, id):
         success_url='https://tap-django-stripe.herokuapp.com',
         cancel_url='https://tap-django-stripe.herokuapp.com',
     )
-    return JsonResponse({'sessionId': checkout_session.id})
+    return redirect(checkout_session.url, code=303)
+    # return JsonResponse({'sessionId': checkout_session.id})
