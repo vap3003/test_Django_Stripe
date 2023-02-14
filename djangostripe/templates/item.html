@@ -19,7 +19,7 @@
 
         // Create a new Checkout Session using the server-side endpoint you
         // created in step 3.
-        fetch('{% https://tap-django-stripe.herokuapp.com/api/checkout-session/{{ item.id }} %}', {
+        fetch('https://tap-django-stripe.herokuapp.com/api/checkout-session/1', {
             method: 'POST',
         })
             .then(function (response) {
