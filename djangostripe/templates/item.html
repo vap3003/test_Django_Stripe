@@ -8,15 +8,14 @@
     <h1>{{ item.name }}</h1>
     <p>{{ item.description }}</p>
     <p>{{ item.price }}</p>
-    <button onclick="goStripe()">Buy</button>
     <script src="https://js.stripe.com/v3/" type="text/javascript"></script>
     <script type="text/javascript">
-
+      <button class="btn btn-success ml-auto" id="checkout-button">Buy {{ item.name }}</button>
       // Create an instance of the Stripe object with your publishable API key
       var stripe = Stripe('{{ stripe_publishable_key }}');
       var checkoutButton = document.getElementById('checkout-button');
 
-        function goStripe() {
+      checkoutButton.addEventListener('click', function () {
 
         // Create a new Checkout Session using the server-side endpoint you
         // created in step 3.
@@ -26,7 +25,6 @@
             .then((response) => {
                 return response.json();
             })
-            console.log("story " + recponse + " story");
             .then((session) => {
                 return stripe.redirectToCheckout({ sessionId: session.id });
             })
@@ -41,7 +39,7 @@
             .catch(function (error) {
                 console.error('Error:', error);
             });
-      }
+      });
     </script>
   </body>
 </html>
