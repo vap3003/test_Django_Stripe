@@ -2,45 +2,26 @@
 
 <html>
   <head>
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='slim' %}
     <title>Buy {{ item.name }}</title>
   </head>
   <body>
-    <h1>{{ item.name }}</h1>
-    <p>{{ item.description }}</p>
-    <p>{{ item.price }}</p>
-    <a href="https://tap-django-stripe.herokuapp.com/api/checkout-session/{{ item.id }}" class="button">Buy</a>
-    {% comment %} <script src="https://js.stripe.com/v3/" type="text/javascript"></script>
-    <button class="btn btn-success ml-auto" id="checkout-button">Buy {{ item.name }}</button>
-    <script type="text/javascript">
-      // Create an instance of the Stripe object with your publishable API key
-      var stripe = Stripe('{{ api_key }}');
-      var checkoutButton = document.getElementById('checkout-button');
-
-      checkoutButton.addEventListener('click', function () {
-
-        // Create a new Checkout Session using the server-side endpoint you
-        // created in step 3.
-        fetch('https://tap-django-stripe.herokuapp.com/api/checkout-session/1', {
-            method: 'GET',
-        })
-            .then((response) => {
-                return response.json();
-            })
-            .then((session) => {
-                return stripe.redirectToCheckout({ sessionId: session.id });
-            })
-            .then(function (result) {
-                // If `redirectToCheckout` fails due to a browser or network
-                // error, you should display the localized error message to your
-                // customer using `error.message`.
-                if (result.error) {
-                    alert(result.error.message);
-                }
-            })
-            .catch(function (error) {
-                console.error('Error:', error);
-            });
-      });
-    </script> {% endcomment %}
+    <div class="container py-5">
+      <h1>Shop</h1>
+      <hr>
+      <article>
+          <h2>{{ item.name }}</h2>
+          <h5>{{ item.price }}</h5>
+        <br>
+        <h5>{{ item.description }}</h5>
+        <br>
+        
+        <a href="https://tap-django-stripe.herokuapp.com/buy/{{ item.id }}" class="button">
+          <button class="btn btn-primary">Buy</button>
+        </a>
+    </article>
+  </div>
   </body>
 </html>
