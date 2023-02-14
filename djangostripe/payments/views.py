@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_safe
 
 from .models import Item
 
@@ -14,6 +15,7 @@ def paginator(request, items_list):
     return paginator.get_page(page_number)
 
 
+@require_safe
 def all_items(request):
     item_list = Item.objects.all()
     page_obj = paginator(request, item_list)
@@ -26,6 +28,7 @@ def all_items(request):
     return render(request, template, context)
 
 
+@require_safe
 def item(request, id):
     item = get_object_or_404(Item, id=id)
     template = 'items/item.html'
@@ -37,6 +40,7 @@ def item(request, id):
     return render(request, template, context)
 
 
+@require_safe
 @csrf_exempt
 def buy(request, id):
     item = get_object_or_404(Item, pk=id)
