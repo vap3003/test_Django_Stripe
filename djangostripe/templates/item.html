@@ -8,21 +8,8 @@
     <h1>{{ item.name }}</h1>
     <p>{{ item.description }}</p>
     <p>{{ item.price }}</p>
-    <a target="_blank"
-    class="btn btn-info pull-right"
-    href="{% url buy item.pk %}">
-    Check It Out
-    </a>
-    {% comment %} <button id="buy-button">Buy</button> {% endcomment %}
-
-    {% comment %} <script type="text/javascript">
-      var stripe = Stripe({{ api_key }});
-      var buyButton = document.getElementById(buy-button);
-      buyButton.addEventListener('click', function() {
-        fetch('${url}/buy/1', { method: 'GET' })
-        .then(response => response.json())
-        .then(session => stripe.redirectToCheckout({ sessionId: session.id }))
-      });
-    </script> {% endcomment %}
+    <form action="{{ document.location.hostname }}/buy/{{ item.pk }}">
+      <input type="submit" value="Buy" />
+    </form>
   </body>
 </html>
