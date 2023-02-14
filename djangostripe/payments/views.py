@@ -2,11 +2,26 @@ from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.csrf import csrf_exempt
 import stripe
+from django.core.paginator import Paginator
 from .models import Item
 
 
+def paginator(request, items_list):
+    paginator = Paginator(items_list, settings.ITEMS_ON_PAGE)
+    page_number = request.GET.get('page')
+    return paginator.get_page(page_number)
+
+
 def all_items(request):
-    pass
+    item_list = Item.objects.all()
+    page_obj = paginator(request, item_list)
+    template = 'home.html'
+    api_key = settings.STRIPE_PUBLISHABLE_KEY
+    context = {
+        'page_obj': page_obj,
+        'api_key': api_key
+    }
+    return render(request, template, context)
 
 
 def item(request, id):
