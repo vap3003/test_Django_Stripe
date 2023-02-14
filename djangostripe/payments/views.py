@@ -34,8 +34,8 @@ def buy(request, id):
                 },
             ],
             mode='payment',
-            success_url=domain + '/success/',
-            cancel_url=domain + '/cancel/',
+            success_url = domain + '/success/',
+            cancel_url = domain + '/cancel/',
         )
         return redirect(checkout_session.url)
 

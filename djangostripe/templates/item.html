@@ -11,12 +11,12 @@
     <button id="buy-button">Buy</button>
     <script type="text/javascript">
       var stripe = Stripe({{ api_key }});
-      var buyButton = document.getElementById(buy-button');
+      var buyButton = document.getElementById(buy-button);
       buyButton.addEventListener('click', function() {
         // Create a new Checkout Session using the server-side endpoint 
         // Redirect to Stripe Session Checkout
-        fetch('https://tap-django-stripe.herokuapp.com/buy/1', {method: 'GET'})
-        .then(response => return response.json())
+        fetch('${url}/buy/1', { method: 'GET' })
+        .then(response => response.json())
         .then(session => stripe.redirectToCheckout({ sessionId: session.id }))
       });
     </script>
